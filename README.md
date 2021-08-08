@@ -5,3 +5,6 @@ To install
 
 To build
 `npm run build`
+
+Dev server
+`npm run dev`
