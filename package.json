@@ -6,8 +6,8 @@
   "main": "",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "serve": "webpack --config webpack.dev.js",
-    "prod": "webpack --config webpack.prod.js"
+    "prod": "webpack --config webpack.prod.js",
+    "dev": "webpack serve --config webpack.dev.js --hot"
   },
   "repository": {
     "type": "git",

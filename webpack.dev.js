@@ -13,6 +13,12 @@ module.exports = {
     clean: true, // Cleans /dist folder
   },
   mode: 'development',
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    index: 'index.html',
+    compress: true,
+    port: 9000,
+  },
   module: {
     rules: [
       {
