@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -16,9 +17,16 @@ module.exports = {
   mode: 'production',
   module: {
     rules: [
+      // {
+      //   test: /\.html$/i,
+      //   use: ['html-loader'],
+      //   generator: {
+      //     filename: '[name][ext]',
+      //   },
+      // },
       {
-        test: /\.html$/i,
-        use: ['html-loader'],
+        test: /\.pug$/i,
+        use: ['html-loader', 'pug-html-loader'],
         generator: {
           filename: '[name][ext]',
         },
@@ -69,7 +77,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'styles.[contenthash:8].css',
     }),
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    // new HtmlWebpackPlugin({
+    //   template: './src/index.pug',
+    //   filename: 'index.html',
+    //   minify: false,
+    // }),
+    new HtmlWebpackPlugin({
+      template: './src/index.pug',
+    }),
+    // new HtmlWebpackPugPlugin({
+    //   adjustIndent: true,
+    // }),
     // new CleanWebpackPlugin(),
   ],
 };

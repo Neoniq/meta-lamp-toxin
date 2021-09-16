@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
 
 module.exports = {
   devtool: false,
@@ -7,11 +8,11 @@ module.exports = {
     main: './src/app.js',
     // vendor: './src/vendor.js',
   },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true, // Cleans /dist folder
-  },
+  // output: {
+  //   filename: '[name].bundle.js',
+  //   path: path.resolve(__dirname, 'dist'),
+  //   clean: true, // Cleans /dist folder
+  // },
   mode: 'development',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -22,10 +23,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/i,
-        use: ['html-loader'],
+        test: /\.pug$/i,
+        use: ['html-loader', 'pug-html-loader'],
+        // basedir: path.resolve(__dirname, 'src'),
         generator: {
-          filename: '[name][ext]',
+          filename: '[hash][ext]',
         },
       },
       {
@@ -65,7 +67,15 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    // new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new HtmlWebpackPlugin({
+      template: './src/index.pug',
+      filename: 'index.pug',
+      minify: false,
+    }),
+    new HtmlWebpackPugPlugin({
+      adjustIndent: true,
+    }),
     // new CleanWebpackPlugin(),
   ],
 };
